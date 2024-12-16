@@ -50,4 +50,4 @@ for i in range(len(content)):
                         second_number = ""
                         current_stage = -1
 print(total)
-#total was 166905464
+#the answer was 166905464
