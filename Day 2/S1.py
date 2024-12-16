@@ -29,4 +29,4 @@ for i in range(len(data)):
         safe_amount += 1
 
 print(safe_amount)
-#holder
+#resultat est 585
