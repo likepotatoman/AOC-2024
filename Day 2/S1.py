@@ -29,4 +29,4 @@ for i in range(len(data)):
         safe_amount += 1
 
 print(safe_amount)
-#resultat est 585
+#the answer was 585
