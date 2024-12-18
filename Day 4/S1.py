@@ -1,4 +1,4 @@
-with open("AdventOfCode D-4 input.txt", "r") as file:
+with open("AOC D-4 input.txt", "r") as file:
     content = file.read()
 lines = content.splitlines()
 matrice = []
@@ -76,7 +76,7 @@ for i in range(len(matrice)):
 
 #du haut
 test_matrice = flip(rotate(matrice))
-for i in range(len(matrice[i])):
+for i in range(len(matrice)):
     total_final += check_line(test_matrice[i])
 
 #du bas
@@ -86,22 +86,23 @@ for i in range(len(matrice)):
 
 #du diagonal haut gauche
 test_matrice = diagonal_read(matrice)
-for i in range(len(matrice)):
+for i in range(len(test_matrice)):
     total_final += check_line(test_matrice[i])
 
 #du diagonal haut droit
-test_matrice = diagonal_read(flip(matrice))
-for i in range(len(matrice)):
+test_matrice = diagonal_read(rotate(matrice))
+for i in range(len(test_matrice)):
     total_final += check_line(test_matrice[i])
 
 #du diagonal bas gauche
-test_matrice = flip(diagonal_read((flip(matrice)))
-for i in range(len(matrice)):
+test_matrice = diagonal_read(rotate(rotate(matrice)))
+for i in range(len(test_matrice)):
     total_final += check_line(test_matrice[i])
 
 #du diagonal bas droit
-test_matrice = flip(diagonal_read(matrice))
-for i in range(len(matrice)):
+test_matrice = diagonal_read(rotate(rotate(rotate(matrice))))
+for i in range(len(test_matrice)):
     total_final += check_line(test_matrice[i])
 
 print(total_final)
+#the answer was 2344
