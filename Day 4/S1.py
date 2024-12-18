@@ -3,7 +3,7 @@ with open("AdventOfCode D-4 input.txt", "r") as file:
 lines = content.splitlines()
 matrice = []
 for i in range(len(lines)):
-    matrice.append(list(lines[i])
+    matrice.append(list(lines[i]))
 final_total = 0
 
 def check_line(line):
@@ -51,8 +51,16 @@ def diagonal_read(matrice):
             k += 1
             j -= 1
         diagonal_read_matrice.append(line)
-    return diagonal_read_matrice
-
+    
+    for i in range(1,len(matrice[0])):
+        line = []
+        j = len(matrice) - 1
+        k = i
+        while k < len(matrice[0]):
+            line.append(matrice[j][k])
+            k += 1
+            j -= 1
+        diagonal_read_matrice.append(line)
     return diagonal_read_matrice
     
 
@@ -67,7 +75,7 @@ for i in range(len(matrice)):
     total_final += check_line(test_matrice[i])
 
 #du haut
-test_matrice = rotate(flip(matrice))
+test_matrice = flip(rotate(matrice))
 for i in range(len(matrice[i])):
     total_final += check_line(test_matrice[i])
 
@@ -75,3 +83,25 @@ for i in range(len(matrice[i])):
 test_matrice = rotate(matrice)
 for i in range(len(matrice)):
     total_final += check_line(test_matrice[i])
+
+#du diagonal haut gauche
+test_matrice = diagonal_read(matrice)
+for i in range(len(matrice)):
+    total_final += check_line(test_matrice[i])
+
+#du diagonal haut droit
+test_matrice = diagonal_read(flip(matrice))
+for i in range(len(matrice)):
+    total_final += check_line(test_matrice[i])
+
+#du diagonal bas gauche
+test_matrice = flip(diagonal_read((flip(matrice)))
+for i in range(len(matrice)):
+    total_final += check_line(test_matrice[i])
+
+#du diagonal bas droit
+test_matrice = flip(diagonal_read(matrice))
+for i in range(len(matrice)):
+    total_final += check_line(test_matrice[i])
+
+print(total_final)
