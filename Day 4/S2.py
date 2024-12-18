@@ -1,8 +1,17 @@
+with open("C:/Users/dmlam/Desktop/AOC2024 D-4.txt","r") as file:
+    content = file.read()
+    lines = content.splitlines()
+prep_matrice = []
+for i in range(len(lines)):
+    prep_matrice.append(list(lines[i]))
+total_final = 0
 
 matrice = []
-for i in range(len(lines)):
-    matrice.append(list(lines[i]))
-total_final = 0
+for i in range(len(prep_matrice)):
+    matrice.append([])
+    for j in range(len(prep_matrice[0])):
+        matrice[i].append([prep_matrice[i][j],i,j])
+
 
 def check_line(line):
     position = []
@@ -40,7 +49,7 @@ def diagonal_read(matrice):
         j = i
         k = 0
         while j >= 0:
-            line.append([matrice[j][k],j,k])
+            line.append(matrice[j][k])
             k += 1
             j -= 1
         diagonal_read_matrice.append(line)
@@ -50,7 +59,7 @@ def diagonal_read(matrice):
         j = len(matrice) - 1
         k = i
         while k < len(matrice[0]):
-            line.append([matrice[j][k],j,k])
+            line.append(matrice[j][k])
             k += 1
             j -= 1
         diagonal_read_matrice.append(line)
@@ -59,37 +68,34 @@ def diagonal_read(matrice):
 
 #du diagonal haut gauche
 test_matrice = diagonal_read(matrice)
-print(test_matrice)
 diag= []
-diag.append([])
 for i in range(len(test_matrice)):
-    diag[0].append(check_line(test_matrice[i]))
-print(diag)
+    diag.append(check_line(test_matrice[i]))
 
 #du diagonal haut droit
 test_matrice = diagonal_read(rotate(matrice))
-diag.append([])
 for i in range(len(test_matrice)):
-    diag[1].append(check_line(test_matrice[i]))
+    diag.append(check_line(test_matrice[i]))
 
 #du diagonal bas gauche
 test_matrice = diagonal_read(rotate(rotate(matrice)))
-diag.append([])
 for i in range(len(test_matrice)):
-    diag[2].append(check_line(test_matrice[i]))
+    diag.append(check_line(test_matrice[i]))
 
 #du diagonal bas droit
 test_matrice = diagonal_read(rotate(rotate(rotate(matrice))))
-diag.append([])
 for i in range(len(test_matrice)):
-    diag[3].append(check_line(test_matrice[i]))
+    diag.append(check_line(test_matrice[i]))
 
+final_diag = []
 for i in range(len(diag)):
-    for j in range(i,4):
-        for k in range(len(diag[i])):
-            for h in range(len(diag[i][k])):
-                
+    for j in range(len(diag[i])):
+        final_diag.append(diag[i][j])
 
+for i in range(len(final_diag)):
+    for j in range(i+1, len(final_diag)):
+        if final_diag[i] == final_diag[j]:
+            total_final += 1
 
 print(total_final)
-#the answer was
+#the answer was 1815
