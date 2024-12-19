@@ -41,9 +41,50 @@ def check(update, rule):
                 return True
             if update[i] == rule[1]:
                 return False
-        
     else : 
         return True
+
+def order(numbers, rules):
+        all_numbers = list(numbers)
+        ordered = [numbers[0]]
+        all_numbers.pop(0)
+        checked_number_index = 0
+        stuck_counter = 0
+
+        while len(ordered) != len(numbers):
+            stuck_counter += 1
+            if stuck_counter > 5000:
+                print("stuck")
+
+            checked_number = all_numbers[checked_number_index]
+            maximum_index = len(ordered)
+            minimum_index = 0
+            for i in range(len(rules)):
+                if rules[i][0] == checked_number:
+                    if rules[i][1] in ordered:
+                        if ordered.index(rules[i][1]) < maximum_index : 
+                            maximum_index = ordered.index(rules[i][1])
+                
+                if rules[i][1] == checked_number:
+                    if rules[i][0] in ordered:
+                        if ordered.index(rules[i][0]) + 1 > minimum_index : 
+                            minimum_index = ordered.index(rules[i][0]) + 1
+            checked_number_index += 1
+
+            if maximum_index == minimum_index:
+                new_list = []
+                i = 0
+                while i < len(ordered):
+                    if i == maximum_index:
+                        new_list.append(checked_number)
+                        all_numbers.pop(checked_number)
+                    else : 
+                        new_list.append(ordered[i])
+                ordered = new_list
+                cheked_number_index = 0
+                stuck_counter = 0
+        return ordered
+    
 
 not_ordered = []
 for i in range(len(updates)):
