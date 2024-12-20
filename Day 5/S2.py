@@ -41,6 +41,7 @@ def check(update, rule):
                 return True
             if update[i] == rule[1]:
                 return False
+        
     else : 
         return True
 
@@ -49,13 +50,8 @@ def order(numbers, rules):
         ordered = [numbers[0]]
         all_numbers.pop(0)
         checked_number_index = 0
-        stuck_counter = 0
 
         while len(ordered) != len(numbers):
-            stuck_counter += 1
-            if stuck_counter > 5000:
-                print("stuck")
-
             checked_number = all_numbers[checked_number_index]
             maximum_index = len(ordered)
             minimum_index = 0
@@ -74,17 +70,25 @@ def order(numbers, rules):
             if maximum_index == minimum_index:
                 new_list = []
                 i = 0
-                while i < len(ordered):
-                    if i == maximum_index:
-                        new_list.append(checked_number)
-                        all_numbers.pop(checked_number)
-                    else : 
+                if maximum_index == 0:
+                    new_list = [checked_number]
+                    for i in range(len(ordered)):
+                        new_list.append(ordered[i])
+                elif maximum_index == len(ordered):
+                    new_list = ordered
+                    new_list.append(checked_number)
+                else : 
+                    for i in range(maximum_index):
+                        new_list.append(ordered[i])
+                    new_list.append(checked_number)
+                    all_numbers.remove(checked_number)
+                    for i in range(maximum_index, len(ordered)):
                         new_list.append(ordered[i])
                 ordered = new_list
-                cheked_number_index = 0
-                stuck_counter = 0
+                checked_number_index = 0
+            
         return ordered
-    
+
 
 not_ordered = []
 for i in range(len(updates)):
@@ -96,9 +100,18 @@ for i in range(len(updates)):
     if add == False:
         not_ordered.append(updates[i])
 
+ordered =[]
+for i in range(len(not_ordered)):
+    rules_that_apply = []
+    for j in range(len(rules)):
+        if rules[j][0] in not_ordered[i] and rules[j][1] in not_ordered[i]:
+            rules_that_apply.append(rules[j])
+    
+    ordered.append(order(not_ordered[i], rules_that_apply))
+
 total = 0
 for i in range(len(ordered)):
     total += ordered[i][round(len(ordered[i])//2)]
 
 print(total)
-#the answer was
+#the answer was 5273
