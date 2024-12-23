@@ -39,4 +39,4 @@ while expended_data[i] != ".":
     total += expended_data[i]*i
     i += 1
 print(total)
-
+#the answer was 6291146824486
