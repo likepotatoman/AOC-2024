@@ -8,10 +8,6 @@ def blink(n):
     else :
         return [n * 2024]
 
-print(blink(0))
-print(blink(20500600680548))
-print(blink(3))
-
 for blink_times in range(25):
     nouvelle_entree = []
     print("blinked")
