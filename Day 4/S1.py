@@ -4,7 +4,7 @@ lines = content.splitlines()
 matrice = []
 for i in range(len(lines)):
     matrice.append(list(lines[i]))
-final_total = 0
+total_final = 0
 
 def check_line(line):
     total = 0
